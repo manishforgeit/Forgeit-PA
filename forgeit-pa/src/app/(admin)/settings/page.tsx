@@ -5,9 +5,6 @@ import { createClient } from '@/lib/supabase/client'
 import { toast } from 'sonner'
 import { Save, Settings } from 'lucide-react'
 
-export const dynamic = 'force-dynamic'
-export const dynamic = 'force-dynamic'
-
 interface SettingsData {
   id: string
   pa_name: string
