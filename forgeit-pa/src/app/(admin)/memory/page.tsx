@@ -18,6 +18,7 @@ interface Memory {
 
 const CATEGORIES = ['identity', 'company', 'preferences', 'rules', 'personal', 'general']
 
+export const dynamic = 'force-dynamic'
 export default function MemoryPage() {
   const supabase = createClient()
   const [memories, setMemories] = useState<Memory[]>([])
