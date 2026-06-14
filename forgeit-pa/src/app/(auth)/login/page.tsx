@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { Zap, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 
+export const dynamic = 'force-dynamic'
 export default function LoginPage() {
   const supabase = createClient()
   const router = useRouter()
