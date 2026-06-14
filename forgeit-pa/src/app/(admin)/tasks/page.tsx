@@ -6,6 +6,8 @@ import { Plus, CheckSquare, Clock, Circle, XCircle } from 'lucide-react'
 import { toast } from 'sonner'
 import { format } from 'date-fns'
 
+export const dynamic = 'force-dynamic'
+
 interface Task {
   id: string
   title: string

@@ -1,6 +1,8 @@
 import { createClient } from '@/lib/supabase/server'
 import { Users, Mail, Phone } from 'lucide-react'
 
+export const dynamic = 'force-dynamic'
+
 const roleColors: Record<string, string> = {
   founder: 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300',
   cto: 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300',

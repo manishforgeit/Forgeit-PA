@@ -1,6 +1,8 @@
 import { createClient } from '@/lib/supabase/server'
 import { format } from 'date-fns'
 
+export const dynamic = 'force-dynamic'
+
 export default async function RequestsPage({
   searchParams,
 }: {

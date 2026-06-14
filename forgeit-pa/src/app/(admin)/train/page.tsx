@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { Sparkles, Loader2, CheckCircle, Brain } from 'lucide-react'
 
+export const dynamic = 'force-dynamic'
+
 const exampleInstructions = [
   "When someone asks for a website, always ask for their budget range before anything else.",
   "Client requests with budget above ₹1 lakh are always HIGH priority.",
