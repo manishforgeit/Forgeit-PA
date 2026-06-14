@@ -1,14 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Zap, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 
-export const dynamic = 'force-dynamic'
 export default function LoginPage() {
-  const supabase = createClient()
   const router = useRouter()
   const searchParams = useSearchParams()
   const next = searchParams.get('next') ?? '/admin/dashboard'
@@ -19,18 +16,21 @@ export default function LoginPage() {
   const [mode, setMode] = useState<'login' | 'magic'>('login')
   const [magicSent, setMagicSent] = useState(false)
 
+  async function getSupabase() {
+    const { createClient } = await import('@/lib/supabase/client')
+    return createClient()
+  }
+
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault()
     setIsLoading(true)
-
+    const supabase = await getSupabase()
     const { error } = await supabase.auth.signInWithPassword({ email, password })
-
     if (error) {
       toast.error(error.message)
       setIsLoading(false)
       return
     }
-
     router.push(next)
     router.refresh()
   }
@@ -38,18 +38,16 @@ export default function LoginPage() {
   async function handleMagicLink(e: React.FormEvent) {
     e.preventDefault()
     setIsLoading(true)
-
+    const supabase = await getSupabase()
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=${next}` },
     })
-
     if (error) {
       toast.error(error.message)
       setIsLoading(false)
       return
     }
-
     setMagicSent(true)
     setIsLoading(false)
   }
@@ -57,7 +55,6 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
-        {/* Logo */}
         <div className="flex items-center gap-2.5 justify-center mb-8">
           <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center">
             <Zap className="w-5 h-5 text-primary-foreground" />
